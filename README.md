@@ -2,31 +2,51 @@
 
 An end-to-end Natural Language Processing (NLP) web application that classifies incoming SMS messages as **Spam** or **Not Spam (Ham)** in real time.
 
+[![Streamlit App](https://static.streamlit.io/badges/streamlit_badge_black_white.svg)](https://sms-spam-classifier-manish.streamlit.app/)
+[![Python 3.10+](https://img.shields.io/badge/Python-3.10%2B-blue.svg)](https://www.python.org/)
+
+
+---
+📋 Table of Contents
+- [🎯 Problem Statement](#-problem-statement)
+- [💡 Solution & Technical Approach](#-solution--technical-approach)
+- [📌 Project Overview](#-project-overview)
+- [🏗️ Architecture & Inference Pipeline](#️-architecture--inference-pipeline)
+- [📊 Model Benchmarking](#-model-benchmarking)
+- [🖥️ Live Demo](#️-live-demo)
+- [📁 Repository Structure](#-repository-structure)
+- [🚀 Local Installation & Setup](#-local-installation--setup)
+- [🧰 Tech Stack](#-tech-stack)
+
 ---
 
 ## 🎯 Problem Statement
 
-Spam texts — fake prize alerts, phishing links, scam offers — waste time and put users at security risk. But in spam filtering, **not all errors are equal**: misclassifying a legitimate personal, academic, or transactional message as spam (a *false positive*) can mean a missed deadline or a lost message entirely, which is usually far more costly to a user than seeing one extra spam text.
+Spam messages—like fake prize alerts, lottery scams, and phishing links—waste time and put our online security at risk. However, in automated filtering, **not all errors carry equal consequences**:
 
-This project builds a lightweight, high-precision classifier that minimizes false positives while maintaining strong overall detection performance on short, sparse text messages.
+* **False Negative (Spam in Inbox):** A minor inconvenience that the user can manually delete.
+* **False Positive (Not SMS in Junk):** A critical failure. Dropping an urgent personal SMS, two-factor OTP, or academic notification can lead to missed deadlines and loss of critical communication.
+
+**Objective:** Build a lightweight, real-time NLP classifier optimized for **Zero False Positives (100% Precision)** while preserving high overall detection accuracy on sparse text inputs.
 
 ---
 
 ## 💡 Solution & Technical Approach
 
-1. **Text Preprocessing** — raw SMS messages are normalized via lowercasing, tokenization, alphanumeric filtering, English stopword removal, and Porter Stemming to reduce words to their root stems.
-2. **Feature Engineering** — text is vectorized using **TF-IDF**, capped at the top **3,000 features by frequency** to control dimensionality and reduce noise from very rare tokens.
-3. **Model Benchmarking** — 11 classification algorithms (probabilistic, linear, tree-based, and ensemble methods) were evaluated on identical TF-IDF features. **Multinomial Naive Bayes** was selected as the production model.
-4. **Deployment** — packaged as a Streamlit web app with cached model artifacts, a sample-message simulator, and real-time confidence scores.
+1. **Text Preprocessing:** Raw SMS messages are normalized through lowercasing, word tokenization, alphanumeric filtering, stopword removal, and Porter Stemming to extract core word roots.
+2. **Feature Extraction:** Preprocessed text is transformed using **TF-IDF Vectorization** (`max_features=3000`) to capture term importance while suppressing noise from rare typos.
+3. **Model Selection:** Evaluated 11 classification algorithms across probabilistic, linear, tree-based, and ensemble paradigms. **Multinomial Naive Bayes (MNB)** was chosen for its perfect precision on test data.
+4. **Interactive Deployment:** Packaged into a Streamlit web app featuring artifact caching (`@st.cache_resource`), sample message simulation buttons, and dynamic confidence readouts.
 
 ---
 
 ## 📌 Project Overview
 
-- **Dataset**: [UCI SMS Spam Collection](https://archive.ics.uci.edu/dataset/228/sms+spam+collection) — 5,572 messages 
-- **Vectorizer**: TF-IDF, `max_features=3000`
-- **Selected model**: Multinomial Naive Bayes
-- **Interface**: Streamlit web app with real-time inference and sample message simulation
+* **Dataset:** [UCI SMS Spam Collection](https://archive.ics.uci.edu/dataset/228/sms+spam+collection) (5,574 raw messages; cleaned and deduplicated)
+* **Feature Representation:** TF-IDF (`max_features=3000`)
+* **Optimal Model:** Multinomial Naive Bayes (`alpha=1.0`)
+* **Key Metric:** `Precision = 1.0000` (0 False Positives on test split) | `Accuracy = 97.29%`
+* **Interface:** Streamlit Community Cloud
 
 
 ---
@@ -67,21 +87,21 @@ flowchart TD
 
 
 ---
+## 🖥️ Live Demo
 
-## 🖥️ Demo
+🔗 App URL: https://sms-spam-classifier-manish.streamlit.app/
+
 
 ---
 
-
----
 
 ## 🧰 Tech Stack
 
-- **Language**: Python 3.x
+- **Language**: Python 3.10+
 - **ML / NLP**: scikit-learn, NLTK
-- **Data handling**: pandas, NumPy
-- **Web app**: Streamlit
-- **Model persistence**: pickle
+- **Data handling**:Numpy,Pandas
+- **App Framework**: Streamlit
+- **Model Serialization**: pickle
 
 ---
 
