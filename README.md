@@ -89,6 +89,7 @@ flowchart TD
 ---
 
 ## 🖥️ Live Demo
+
 🔗 App URL: https://sms-spam-classifier-manish.streamlit.app/
 
 ![App demo](assets/demo.gif)
